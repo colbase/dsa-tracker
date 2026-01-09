@@ -1,0 +1,1593 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Mastery Tracker</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf8f5;
+            --bg-light: #f5f3ef;
+            --bg-white: #ffffff;
+            --border-black: #1a1a1a;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --text-muted: #888888;
+            --accent-pink: #ff69b4;
+            --accent-violet: #9b59b6;
+            --accent-lavender: #c9a7eb;
+            --accent-yellow: #ffd93d;
+            --accent-cyan: #00d4aa;
+            --stripe-color: #f0e68c;
+            --success-green: #28a745;
+            --warning-orange: #fd7e14;
+            --danger-red: #dc3545;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-cream);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        /* Striped Pattern Background */
+        .striped-bg {
+            background: repeating-linear-gradient(45deg,
+                    var(--stripe-color),
+                    var(--stripe-color) 2px,
+                    var(--bg-cream) 2px,
+                    var(--bg-cream) 8px);
+        }
+
+        /* Header */
+        .header {
+            background: var(--bg-cream);
+            border-bottom: 3px solid var(--border-black);
+            padding: 1.5rem 2rem;
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--accent-violet), var(--accent-pink));
+            border: 3px solid var(--border-black);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            box-shadow: 5px 5px 0 var(--border-black);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-4px);
+            }
+        }
+
+        .logo-text h1 {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, var(--accent-violet), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-text p {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .version-badge {
+            display: inline-block;
+            background: var(--accent-cyan);
+            border: 2px solid var(--border-black);
+            padding: 0.25rem 0.5rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6rem;
+            font-weight: 700;
+            margin-left: 0.5rem;
+            color: var(--border-black);
+        }
+
+        .reset-btn {
+            background: var(--bg-white);
+            border: 3px solid var(--border-black);
+            padding: 0.75rem 1.25rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 4px 4px 0 var(--border-black);
+            transition: all 0.15s ease;
+            text-transform: uppercase;
+        }
+
+        .reset-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 var(--border-black);
+            background: var(--danger-red);
+            color: white;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            background: var(--bg-white);
+            border: 3px solid var(--border-black);
+            padding: 0.75rem 1.5rem;
+            text-align: center;
+            box-shadow: 4px 4px 0 var(--border-black);
+            flex: 1;
+            min-width: 120px;
+            transition: all 0.15s ease;
+        }
+
+        .stat-box:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 var(--border-black);
+        }
+
+        .stat-box.highlight {
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-violet));
+            color: white;
+        }
+
+        .stat-box.streak {
+            background: var(--accent-yellow);
+        }
+
+        .stat-box.today {
+            background: var(--accent-cyan);
+        }
+
+        .stat-value {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: inherit;
+            opacity: 0.8;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Top Stats Row */
+        .top-stats {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Progress Section */
+        .progress-section {
+            background: var(--bg-white);
+            border: 3px solid var(--border-black);
+            padding: 1.5rem;
+            box-shadow: 6px 6px 0 var(--border-black);
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-violet), var(--accent-pink), var(--accent-yellow), var(--accent-cyan));
+        }
+
+        .section-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .progress-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .progress-percentage {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-lavender), var(--accent-pink));
+            border: 2px solid var(--border-black);
+            padding: 0.25rem 0.75rem;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 24px;
+            background: var(--bg-light);
+            border: 3px solid var(--border-black);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-violet), var(--accent-pink));
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* Info Box */
+        .info-box {
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-violet));
+            border: 3px solid var(--border-black);
+            padding: 1rem 1.25rem;
+            color: white;
+            min-width: 220px;
+            box-shadow: 6px 6px 0 var(--border-black);
+        }
+
+        .info-box-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+
+        .info-box-text {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        /* Week Cards */
+        .weeks-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .week-card {
+            width: 100%;
+            background: var(--bg-white);
+            border: 3px solid var(--border-black);
+            box-shadow: 5px 5px 0 var(--border-black);
+            transition: all 0.2s ease;
+        }
+
+        .week-card:hover {
+            box-shadow: 7px 7px 0 var(--border-black);
+        }
+
+        .week-card.expanded {
+            box-shadow: 8px 8px 0 var(--accent-violet);
+            border-color: var(--accent-violet);
+        }
+
+        .week-header {
+            padding: 1rem 1.25rem;
+            border-bottom: 3px solid var(--border-black);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            background: var(--bg-light);
+            transition: all 0.15s ease;
+        }
+
+        .week-header:hover {
+            background: var(--bg-cream);
+        }
+
+        .week-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .week-number {
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, var(--accent-violet), var(--accent-pink));
+            border: 3px solid var(--border-black);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 0.75rem;
+            color: white;
+            box-shadow: 3px 3px 0 var(--border-black);
+        }
+
+        .week-icon {
+            font-size: 1.25rem;
+            line-height: 1;
+        }
+
+        .week-label {
+            font-size: 0.6rem;
+            opacity: 0.9;
+        }
+
+        .week-title {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+        }
+
+        .week-topic {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .week-progress {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .week-count {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 700;
+            background: var(--accent-yellow);
+            border: 2px solid var(--border-black);
+            padding: 0.25rem 0.6rem;
+        }
+
+        .week-count.complete {
+            background: var(--accent-cyan);
+        }
+
+        .week-mini-progress {
+            width: 80px;
+            height: 10px;
+            background: var(--bg-cream);
+            border: 2px solid var(--border-black);
+            overflow: hidden;
+        }
+
+        .week-mini-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success-green), var(--accent-cyan));
+            transition: width 0.3s ease;
+        }
+
+        .expand-icon {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            transition: transform 0.3s ease;
+            width: 32px;
+            height: 32px;
+            border: 2px solid var(--border-black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-white);
+        }
+
+        .week-card.expanded .expand-icon {
+            transform: rotate(180deg);
+            background: var(--accent-violet);
+            color: white;
+        }
+
+        .week-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .week-card.expanded .week-content {
+            max-height: 3000px;
+            padding: 1.25rem;
+        }
+
+        /* Day Group */
+        .day-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .day-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .day-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.75rem;
+            padding: 0.4rem 0.75rem;
+            background: linear-gradient(135deg, var(--accent-violet), var(--accent-pink));
+            border: 2px solid var(--border-black);
+            display: inline-block;
+        }
+
+        /* Problem Items */
+        .problem-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.875rem 1rem;
+            background: var(--bg-white);
+            border: 2px dashed var(--text-muted);
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .problem-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .problem-item:hover {
+            border-style: solid;
+            border-color: var(--border-black);
+            background: var(--bg-light);
+            transform: translateX(4px);
+        }
+
+        .problem-item.completed {
+            background: linear-gradient(135deg, rgba(0, 212, 170, 0.1), rgba(155, 89, 182, 0.1));
+            border-color: var(--accent-cyan);
+            border-style: solid;
+        }
+
+        /* Custom Checkbox */
+        .checkbox {
+            width: 28px;
+            height: 28px;
+            border: 3px solid var(--border-black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-shrink: 0;
+            background: var(--bg-white);
+        }
+
+        .problem-item:hover .checkbox {
+            background: var(--bg-light);
+            transform: scale(1.05);
+        }
+
+        .problem-item.completed .checkbox {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+            animation: checkPop 0.3s ease;
+        }
+
+        @keyframes checkPop {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .checkmark {
+            opacity: 0;
+            color: white;
+            font-family: 'Space Mono', monospace;
+            font-size: 16px;
+            font-weight: bold;
+            transition: opacity 0.15s ease;
+        }
+
+        .problem-item.completed .checkmark {
+            opacity: 1;
+        }
+
+        .problem-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .problem-name {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .problem-item.completed .problem-name {
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+
+        .problem-meta {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .problem-number {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .difficulty {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6rem;
+            padding: 0.2rem 0.5rem;
+            border: 2px solid var(--border-black);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .difficulty.easy {
+            background: #d4edda;
+            color: var(--success-green);
+        }
+
+        .difficulty.medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .difficulty.hard {
+            background: #f8d7da;
+            color: var(--danger-red);
+        }
+
+        .leetcode-link {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 0.4rem 0.75rem;
+            background: var(--accent-yellow);
+            border: 2px solid var(--border-black);
+            transition: all 0.15s ease;
+            white-space: nowrap;
+        }
+
+        .leetcode-link:hover {
+            background: var(--border-black);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--bg-white);
+            border: 4px solid var(--border-black);
+            padding: 2.5rem;
+            text-align: center;
+            max-width: 400px;
+            box-shadow: 10px 10px 0 var(--accent-violet);
+            animation: modalPop 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes modalPop {
+            0% {
+                transform: scale(0.8) rotate(-2deg);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1) rotate(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: bounce 0.6s ease infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .modal h2 {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, var(--accent-violet), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .modal p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+        }
+
+        .modal-btn {
+            background: linear-gradient(135deg, var(--accent-violet), var(--accent-pink));
+            border: 3px solid var(--border-black);
+            color: white;
+            padding: 0.875rem 2rem;
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            box-shadow: 4px 4px 0 var(--border-black);
+        }
+
+        .modal-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 var(--border-black);
+        }
+
+        /* Footer */
+        .footer {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            border-top: 3px dashed var(--text-muted);
+        }
+
+        .footer-text {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .footer-text span {
+            color: var(--accent-pink);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+            }
+
+            .header-top {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .stats-bar {
+                width: 100%;
+            }
+
+            .stat-box {
+                padding: 0.5rem 0.75rem;
+                min-width: 80px;
+            }
+
+            .stat-value {
+                font-size: 1.25rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .top-stats {
+                flex-direction: column;
+            }
+
+            .week-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .week-progress {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .problem-item {
+                flex-wrap: wrap;
+            }
+
+            .leetcode-link {
+                width: 100%;
+                text-align: center;
+                margin-top: 0.5rem;
+            }
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Activity Heatmap */
+        .heatmap-section {
+            background: var(--bg-white);
+            border: 3px solid var(--border-black);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 6px 6px 0 var(--border-black);
+        }
+
+        .heatmap-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .heatmap-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .heatmap-subtitle {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .heatmap-container {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .heatmap-months {
+            display: flex;
+            gap: 2px;
+            margin-bottom: 0.25rem;
+            padding-left: 24px;
+        }
+
+        .heatmap-month {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            min-width: 44px;
+        }
+
+        .heatmap-days-label {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            margin-right: 4px;
+        }
+
+        .heatmap-day-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.5rem;
+            color: var(--text-muted);
+            height: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .heatmap-grid {
+            display: flex;
+            gap: 3px;
+        }
+
+        .heatmap-week {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .heatmap-cell {
+            width: 12px;
+            height: 12px;
+            border: 1px solid var(--border-black);
+            background: var(--bg-light);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            position: relative;
+        }
+
+        .heatmap-cell:hover {
+            transform: scale(1.3);
+            z-index: 10;
+        }
+
+        .heatmap-cell.level-0 {
+            background: var(--bg-light);
+        }
+
+        .heatmap-cell.level-1 {
+            background: #c9a7eb;
+        }
+
+        .heatmap-cell.level-2 {
+            background: #b380d9;
+        }
+
+        .heatmap-cell.level-3 {
+            background: #9b59b6;
+        }
+
+        .heatmap-cell.level-4 {
+            background: #7d3c98;
+        }
+
+        .heatmap-cell.future {
+            background: transparent;
+            border-style: dashed;
+            border-color: var(--text-muted);
+        }
+
+        .heatmap-cell[data-tooltip]:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--border-black);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6rem;
+            white-space: nowrap;
+            border: 2px solid var(--border-black);
+            z-index: 100;
+            margin-bottom: 4px;
+        }
+
+        .heatmap-legend {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            justify-content: flex-end;
+        }
+
+        .heatmap-legend-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--text-muted);
+        }
+
+        .heatmap-legend-cells {
+            display: flex;
+            gap: 2px;
+        }
+
+        .heatmap-legend-cell {
+            width: 12px;
+            height: 12px;
+            border: 1px solid var(--border-black);
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header striped-bg">
+        <div class="header-content">
+            <div class="header-top">
+                <div class="logo">
+                    <div class="logo-icon">�</div>
+                    <div class="logo-text">
+                        <h1>DSA Tracker <span class="version-badge">v3.0</span></h1>
+                        <p>Master 250 problems step by step</p>
+                    </div>
+                </div>
+                <button class="reset-btn" onclick="resetProgress()">↻ Reset All</button>
+            </div>
+            <div class="stats-bar">
+                <div class="stat-box">
+                    <div class="stat-value" id="completedCount">0</div>
+                    <div class="stat-label">✓ Completed</div>
+                </div>
+                <div class="stat-box highlight">
+                    <div class="stat-value" id="remainingCount">250</div>
+                    <div class="stat-label">📋 Remaining</div>
+                </div>
+                <div class="stat-box today">
+                    <div class="stat-value" id="todayCount">0</div>
+                    <div class="stat-label">⚡ Today</div>
+                </div>
+                <div class="stat-box streak">
+                    <div class="stat-value">🔥 <span id="streakDays">0</span></div>
+                    <div class="stat-label">Day Streak</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="top-stats">
+            <div class="progress-section">
+                <div class="section-label">Output // Progress</div>
+                <div class="progress-header">
+                    <div class="progress-title">Overall Progress</div>
+                    <div class="progress-percentage" id="progressPercent">0%</div>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title">💾 Local Storage</div>
+                <div class="info-box-text">Your progress is saved locally in your browser. No server uploads required.
+                </div>
+            </div>
+        </div>
+
+        <!-- Activity Heatmap -->
+        <div class="heatmap-section">
+            <div class="heatmap-header">
+                <div class="heatmap-title">📅 Activity Heatmap</div>
+                <div class="heatmap-subtitle" id="heatmapTotal">0 problems solved in the last 6 months</div>
+            </div>
+            <div id="heatmapContainer"></div>
+            <div class="heatmap-legend">
+                <span class="heatmap-legend-label">Less</span>
+                <div class="heatmap-legend-cells">
+                    <div class="heatmap-legend-cell level-0" style="background: var(--bg-light);"></div>
+                    <div class="heatmap-legend-cell level-1" style="background: #c9a7eb;"></div>
+                    <div class="heatmap-legend-cell level-2" style="background: #b380d9;"></div>
+                    <div class="heatmap-legend-cell level-3" style="background: #9b59b6;"></div>
+                    <div class="heatmap-legend-cell level-4" style="background: #7d3c98;"></div>
+                </div>
+                <span class="heatmap-legend-label">More</span>
+            </div>
+        </div>
+
+        <div class="weeks-grid" id="weeksGrid">
+            <!-- Generated by JavaScript -->
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p class="footer-text">Built for DSA mastery • Track your progress, build <span>consistency</span></p>
+    </footer>
+
+    <div class="modal-overlay" id="celebrationModal">
+        <div class="modal">
+            <div class="modal-icon">🎉</div>
+            <h2>Amazing Progress!</h2>
+            <p id="celebrationText">You've completed another problem! Keep up the great work!</p>
+            <button class="modal-btn" onclick="closeModal()">Continue →</button>
+        </div>
+    </div>
+
+    <script>
+        // Topic icons mapping
+        const topicIcons = {
+            "Arrays & Hashing": "🔢",
+            "Sliding Window": "🪟",
+            "Stack & Queue": "📚",
+            "Binary Search": "🔍",
+            "Linked Lists": "🔗"
+        };
+
+        // Problem Data
+        const problemsData = [
+            // Week 1-2: Arrays & Hashing
+            {
+                week: "1-2", topic: "Arrays & Hashing", day: "Day 1-2", problems: [
+                    { id: 1, name: "Two Sum", leetcode: 1, difficulty: "Easy" },
+                    { id: 2, name: "Contains Duplicate", leetcode: 217, difficulty: "Easy" },
+                    { id: 3, name: "Valid Anagram", leetcode: 242, difficulty: "Easy" },
+                    { id: 4, name: "Concatenation of Array", leetcode: 1929, difficulty: "Easy" },
+                    { id: 5, name: "Replace Elements with Greatest on Right", leetcode: 1299, difficulty: "Easy" },
+                ]
+            },
+            {
+                week: "1-2", topic: "Arrays & Hashing", day: "Day 3-4", problems: [
+                    { id: 6, name: "Group Anagrams", leetcode: 49, difficulty: "Medium" },
+                    { id: 7, name: "Top K Frequent Elements", leetcode: 347, difficulty: "Medium" },
+                    { id: 8, name: "Encode and Decode Strings", leetcode: 271, difficulty: "Medium" },
+                    { id: 9, name: "Product of Array Except Self", leetcode: 238, difficulty: "Medium" },
+                    { id: 10, name: "Longest Consecutive Sequence", leetcode: 128, difficulty: "Medium" },
+                ]
+            },
+            {
+                week: "1-2", topic: "Arrays & Hashing", day: "Day 5-7", problems: [
+                    { id: 11, name: "Running Sum of 1d Array", leetcode: 1480, difficulty: "Easy" },
+                    { id: 12, name: "Find Pivot Index", leetcode: 724, difficulty: "Easy" },
+                    { id: 13, name: "Subarray Sum Equals K", leetcode: 560, difficulty: "Medium" },
+                    { id: 14, name: "Maximum Subarray", leetcode: 53, difficulty: "Medium" },
+                    { id: 15, name: "Maximum Product Subarray", leetcode: 152, difficulty: "Medium" },
+                ]
+            },
+            {
+                week: "1-2", topic: "Arrays & Hashing", day: "Day 8-10", problems: [
+                    { id: 16, name: "Valid Palindrome", leetcode: 125, difficulty: "Easy" },
+                    { id: 17, name: "Two Sum II - Sorted", leetcode: 167, difficulty: "Medium" },
+                    { id: 18, name: "3Sum", leetcode: 15, difficulty: "Medium" },
+                    { id: 19, name: "Container With Most Water", leetcode: 11, difficulty: "Medium" },
+                    { id: 20, name: "Trapping Rain Water", leetcode: 42, difficulty: "Hard" },
+                ]
+            },
+            {
+                week: "1-2", topic: "Arrays & Hashing", day: "Day 11-14", problems: [
+                    { id: 21, name: "Move Zeroes", leetcode: 283, difficulty: "Easy" },
+                    { id: 22, name: "Remove Duplicates", leetcode: 26, difficulty: "Easy" },
+                    { id: 23, name: "Remove Element", leetcode: 27, difficulty: "Easy" },
+                    { id: 24, name: "Sort Colors", leetcode: 75, difficulty: "Medium" },
+                    { id: 25, name: "Rotate Array", leetcode: 189, difficulty: "Medium" },
+                    { id: 26, name: "Merge Intervals", leetcode: 56, difficulty: "Medium" },
+                    { id: 27, name: "Insert Interval", leetcode: 57, difficulty: "Medium" },
+                    { id: 28, name: "Non-overlapping Intervals", leetcode: 435, difficulty: "Medium" },
+                    { id: 29, name: "First Missing Positive", leetcode: 41, difficulty: "Hard" },
+                    { id: 30, name: "4Sum", leetcode: 18, difficulty: "Medium" },
+                ]
+            },
+            // Week 3-4: Sliding Window
+            {
+                week: "3-4", topic: "Sliding Window", day: "Day 15-17", problems: [
+                    { id: 31, name: "Maximum Average Subarray I", leetcode: 643, difficulty: "Easy" },
+                    { id: 32, name: "Find All Anagrams", leetcode: 438, difficulty: "Medium" },
+                    { id: 33, name: "Permutation in String", leetcode: 567, difficulty: "Medium" },
+                    { id: 34, name: "Max Sum Distinct Subarrays", leetcode: 2461, difficulty: "Medium" },
+                    { id: 35, name: "Repeated DNA Sequences", leetcode: 187, difficulty: "Medium" },
+                ]
+            },
+            {
+                week: "3-4", topic: "Sliding Window", day: "Day 18-21", problems: [
+                    { id: 36, name: "Best Time Buy/Sell Stock", leetcode: 121, difficulty: "Easy" },
+                    { id: 37, name: "Longest Substring No Repeat", leetcode: 3, difficulty: "Medium" },
+                    { id: 38, name: "Longest Repeating Char Replace", leetcode: 424, difficulty: "Medium" },
+                    { id: 39, name: "Max Consecutive Ones III", leetcode: 1004, difficulty: "Medium" },
+                    { id: 40, name: "Fruit Into Baskets", leetcode: 904, difficulty: "Medium" },
+                    { id: 41, name: "Minimum Window Substring", leetcode: 76, difficulty: "Hard" },
+                    { id: 42, name: "Sliding Window Maximum", leetcode: 239, difficulty: "Hard" },
+                    { id: 43, name: "Min Size Subarray Sum", leetcode: 209, difficulty: "Medium" },
+                    { id: 44, name: "Subarrays K Different", leetcode: 992, difficulty: "Hard" },
+                    { id: 45, name: "Longest Substr K Distinct", leetcode: 340, difficulty: "Medium" },
+                ]
+            },
+            // Week 5-6: Stack & Queue
+            {
+                week: "5-6", topic: "Stack & Queue", day: "Day 22-24", problems: [
+                    { id: 46, name: "Valid Parentheses", leetcode: 20, difficulty: "Easy" },
+                    { id: 47, name: "Min Stack", leetcode: 155, difficulty: "Medium" },
+                    { id: 48, name: "Queue using Stacks", leetcode: 232, difficulty: "Easy" },
+                    { id: 49, name: "Stack using Queues", leetcode: 225, difficulty: "Easy" },
+                    { id: 50, name: "Baseball Game", leetcode: 682, difficulty: "Easy" },
+                ]
+            },
+            {
+                week: "5-6", topic: "Stack & Queue", day: "Day 25-28", problems: [
+                    { id: 51, name: "Next Greater Element I", leetcode: 496, difficulty: "Easy" },
+                    { id: 52, name: "Daily Temperatures", leetcode: 739, difficulty: "Medium" },
+                    { id: 53, name: "Next Greater Element II", leetcode: 503, difficulty: "Medium" },
+                    { id: 54, name: "Online Stock Span", leetcode: 901, difficulty: "Medium" },
+                    { id: 55, name: "Car Fleet", leetcode: 853, difficulty: "Medium" },
+                    { id: 56, name: "Remove K Digits", leetcode: 402, difficulty: "Medium" },
+                    { id: 57, name: "Largest Rectangle Histogram", leetcode: 84, difficulty: "Hard" },
+                    { id: 58, name: "Maximal Rectangle", leetcode: 85, difficulty: "Hard" },
+                ]
+            },
+            {
+                week: "5-6", topic: "Stack & Queue", day: "Day 29-31", problems: [
+                    { id: 59, name: "Evaluate RPN", leetcode: 150, difficulty: "Medium" },
+                    { id: 60, name: "Basic Calculator II", leetcode: 227, difficulty: "Medium" },
+                    { id: 61, name: "Basic Calculator", leetcode: 224, difficulty: "Hard" },
+                    { id: 62, name: "Decode String", leetcode: 394, difficulty: "Medium" },
+                    { id: 63, name: "Asteroid Collision", leetcode: 735, difficulty: "Medium" },
+                    { id: 64, name: "Generate Parentheses", leetcode: 22, difficulty: "Medium" },
+                    { id: 65, name: "Simplify Path", leetcode: 71, difficulty: "Medium" },
+                ]
+            },
+            // Week 7-8: Binary Search
+            {
+                week: "7-8", topic: "Binary Search", day: "Day 32-34", problems: [
+                    { id: 66, name: "Binary Search", leetcode: 704, difficulty: "Easy" },
+                    { id: 67, name: "Search Insert Position", leetcode: 35, difficulty: "Easy" },
+                    { id: 68, name: "Guess Number", leetcode: 374, difficulty: "Easy" },
+                    { id: 69, name: "First Bad Version", leetcode: 278, difficulty: "Easy" },
+                    { id: 70, name: "Find Smallest Letter", leetcode: 744, difficulty: "Easy" },
+                ]
+            },
+            {
+                week: "7-8", topic: "Binary Search", day: "Day 35-38", problems: [
+                    { id: 71, name: "Search 2D Matrix", leetcode: 74, difficulty: "Medium" },
+                    { id: 72, name: "Search Rotated Sorted", leetcode: 33, difficulty: "Medium" },
+                    { id: 73, name: "Search Rotated II", leetcode: 81, difficulty: "Medium" },
+                    { id: 74, name: "Find Min Rotated", leetcode: 153, difficulty: "Medium" },
+                    { id: 75, name: "Find Peak Element", leetcode: 162, difficulty: "Medium" },
+                    { id: 76, name: "Find First Last Position", leetcode: 34, difficulty: "Medium" },
+                    { id: 77, name: "Single Sorted Element", leetcode: 540, difficulty: "Medium" },
+                    { id: 78, name: "Search 2D Matrix II", leetcode: 240, difficulty: "Medium" },
+                ]
+            },
+            {
+                week: "7-8", topic: "Binary Search", day: "Day 39-42", problems: [
+                    { id: 79, name: "Sqrt(x)", leetcode: 69, difficulty: "Easy" },
+                    { id: 80, name: "Koko Eating Bananas", leetcode: 875, difficulty: "Medium" },
+                    { id: 81, name: "Capacity Ship Packages", leetcode: 1011, difficulty: "Medium" },
+                    { id: 82, name: "Split Array Largest Sum", leetcode: 410, difficulty: "Hard" },
+                    { id: 83, name: "Min Distance Gas Station", leetcode: 774, difficulty: "Hard" },
+                    { id: 84, name: "K Closest Elements", leetcode: 658, difficulty: "Medium" },
+                    { id: 85, name: "Time Based Key-Value", leetcode: 981, difficulty: "Medium" },
+                    { id: 86, name: "Median Two Sorted", leetcode: 4, difficulty: "Hard" },
+                ]
+            },
+            // Week 9-10: Linked Lists
+            {
+                week: "9-10", topic: "Linked Lists", day: "Day 43-45", problems: [
+                    { id: 87, name: "Reverse Linked List", leetcode: 206, difficulty: "Easy" },
+                    { id: 88, name: "Merge Two Sorted Lists", leetcode: 21, difficulty: "Easy" },
+                    { id: 89, name: "Palindrome Linked List", leetcode: 234, difficulty: "Easy" },
+                    { id: 90, name: "Remove LL Elements", leetcode: 203, difficulty: "Easy" },
+                    { id: 91, name: "Remove Duplicates LL", leetcode: 83, difficulty: "Easy" },
+                    { id: 92, name: "Middle of LL", leetcode: 876, difficulty: "Easy" },
+                ]
+            },
+            {
+                week: "9-10", topic: "Linked Lists", day: "Day 46-52", problems: [
+                    { id: 93, name: "Linked List Cycle", leetcode: 141, difficulty: "Easy" },
+                    { id: 94, name: "Linked List Cycle II", leetcode: 142, difficulty: "Medium" },
+                    { id: 95, name: "Remove Nth From End", leetcode: 19, difficulty: "Medium" },
+                    { id: 96, name: "Intersection Two LL", leetcode: 160, difficulty: "Easy" },
+                    { id: 97, name: "Find Duplicate", leetcode: 287, difficulty: "Medium" },
+                    { id: 98, name: "Reorder List", leetcode: 143, difficulty: "Medium" },
+                    { id: 99, name: "Add Two Numbers", leetcode: 2, difficulty: "Medium" },
+                    { id: 100, name: "Copy Random Pointer", leetcode: 138, difficulty: "Medium" },
+                    { id: 101, name: "Swap Nodes Pairs", leetcode: 24, difficulty: "Medium" },
+                    { id: 102, name: "Rotate List", leetcode: 61, difficulty: "Medium" },
+                    { id: 103, name: "Sort List", leetcode: 148, difficulty: "Medium" },
+                    { id: 104, name: "LRU Cache", leetcode: 146, difficulty: "Medium" },
+                    { id: 105, name: "LFU Cache", leetcode: 460, difficulty: "Hard" },
+                    { id: 106, name: "Merge K Sorted Lists", leetcode: 23, difficulty: "Hard" },
+                    { id: 107, name: "Reverse K-Group", leetcode: 25, difficulty: "Hard" },
+                ]
+            },
+        ];
+
+        // State
+        let completedProblems = JSON.parse(localStorage.getItem('dsaProgress')) || {};
+        let streakData = JSON.parse(localStorage.getItem('dsaStreak')) || { count: 0, lastDate: null };
+        let todayCompleted = JSON.parse(localStorage.getItem('dsaToday')) || { date: null, count: 0 };
+        let activityHistory = JSON.parse(localStorage.getItem('dsaActivity')) || {};
+
+        // Initialize
+        function init() {
+            checkStreak();
+            renderHeatmap();
+            renderWeeks();
+            updateStats();
+        }
+
+        // Render Activity Heatmap
+        function renderHeatmap() {
+            const container = document.getElementById('heatmapContainer');
+            const today = new Date();
+            const weeks = 26; // 6 months
+            const startDate = new Date(today);
+            startDate.setDate(startDate.getDate() - (weeks * 7) + (7 - startDate.getDay()));
+
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const days = ['', 'Mon', '', 'Wed', '', 'Fri', ''];
+
+            let html = '<div class="heatmap-months">';
+            let currentMonth = -1;
+            let monthPositions = [];
+
+            // Generate weeks
+            let weeksHtml = '<div class="heatmap-container"><div class="heatmap-days-label">';
+            days.forEach(day => {
+                weeksHtml += `<div class="heatmap-day-label">${day}</div>`;
+            });
+            weeksHtml += '</div><div class="heatmap-grid">';
+
+            let totalActivity = 0;
+
+            for (let w = 0; w < weeks; w++) {
+                weeksHtml += '<div class="heatmap-week">';
+
+                for (let d = 0; d < 7; d++) {
+                    const cellDate = new Date(startDate);
+                    cellDate.setDate(startDate.getDate() + (w * 7) + d);
+
+                    const dateStr = cellDate.toDateString();
+                    const count = activityHistory[dateStr] || 0;
+                    totalActivity += count;
+
+                    const isFuture = cellDate > today;
+                    const month = cellDate.getMonth();
+
+                    // Track month changes
+                    if (d === 0 && month !== currentMonth) {
+                        monthPositions.push({ month: months[month], week: w });
+                        currentMonth = month;
+                    }
+
+                    // Determine level
+                    let level = 'level-0';
+                    if (!isFuture && count > 0) {
+                        if (count >= 5) level = 'level-4';
+                        else if (count >= 3) level = 'level-3';
+                        else if (count >= 2) level = 'level-2';
+                        else level = 'level-1';
+                    }
+
+                    const tooltip = isFuture ? '' : `data-tooltip="${count} problem${count !== 1 ? 's' : ''} on ${cellDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}"`;
+
+                    weeksHtml += `<div class="heatmap-cell ${level} ${isFuture ? 'future' : ''}" ${tooltip}></div>`;
+                }
+
+                weeksHtml += '</div>';
+            }
+
+            weeksHtml += '</div></div>';
+
+            // Build month labels
+            monthPositions.forEach((pos, i) => {
+                const nextPos = monthPositions[i + 1]?.week || weeks;
+                const width = (nextPos - pos.week) * 15;
+                html += `<div class="heatmap-month" style="min-width: ${width}px">${pos.month}</div>`;
+            });
+            html += '</div>';
+
+            container.innerHTML = html + weeksHtml;
+
+            // Update total
+            document.getElementById('heatmapTotal').textContent = `${totalActivity} problems solved in the last 6 months`;
+        }
+
+        // Check and update streak
+        function checkStreak() {
+            const today = new Date().toDateString();
+            const yesterday = new Date(Date.now() - 86400000).toDateString();
+
+            if (todayCompleted.date !== today) {
+                todayCompleted = { date: today, count: 0 };
+                localStorage.setItem('dsaToday', JSON.stringify(todayCompleted));
+            }
+
+            if (streakData.lastDate === yesterday) {
+                // Streak continues
+            } else if (streakData.lastDate !== today) {
+                streakData.count = 0;
+            }
+        }
+
+        // Render week cards
+        function renderWeeks() {
+            const grid = document.getElementById('weeksGrid');
+            const groupedByWeek = {};
+
+            problemsData.forEach(group => {
+                if (!groupedByWeek[group.week]) {
+                    groupedByWeek[group.week] = { topic: group.topic, days: [] };
+                }
+                groupedByWeek[group.week].days.push(group);
+            });
+
+            grid.innerHTML = Object.entries(groupedByWeek).map(([week, data]) => {
+                const allProblems = data.days.flatMap(d => d.problems);
+                const completed = allProblems.filter(p => completedProblems[p.id]).length;
+                const total = allProblems.length;
+                const percentage = total > 0 ? (completed / total * 100) : 0;
+                const icon = topicIcons[data.topic] || '📝';
+                const isComplete = completed === total;
+
+                return `
+                    <div class="week-card" id="week-${week}">
+                        <div class="week-header" onclick="toggleWeek('${week}')">
+                            <div class="week-info">
+                                <div class="week-number">
+                                    <span class="week-icon">${icon}</span>
+                                    <span class="week-label">W${week}</span>
+                                </div>
+                                <div>
+                                    <div class="week-title">${data.topic}</div>
+                                    <div class="week-topic">Week ${week} • ${total} Problems</div>
+                                </div>
+                            </div>
+                            <div class="week-progress">
+                                <span class="week-count ${isComplete ? 'complete' : ''}">${completed}/${total}</span>
+                                <div class="week-mini-progress">
+                                    <div class="week-mini-bar" style="width: ${percentage}%"></div>
+                                </div>
+                                <span class="expand-icon">▼</span>
+                            </div>
+                        </div>
+                        <div class="week-content">
+                            ${data.days.map(day => `
+                                <div class="day-group">
+                                    <div class="day-label">${day.day}</div>
+                                    ${day.problems.map(p => `
+                                        <div class="problem-item ${completedProblems[p.id] ? 'completed' : ''}" 
+                                             onclick="toggleProblem(${p.id}, this)">
+                                            <div class="checkbox">
+                                                <span class="checkmark">✓</span>
+                                            </div>
+                                            <div class="problem-info">
+                                                <div class="problem-name">${p.name}</div>
+                                                <div class="problem-meta">
+                                                    <span class="problem-number">#${p.leetcode}</span>
+                                                    <span class="difficulty ${p.difficulty.toLowerCase()}">${p.difficulty}</span>
+                                                </div>
+                                            </div>
+                                            <a href="https://leetcode.com/problems/${p.name.toLowerCase().replace(/\s+/g, '-')}/" 
+                                               target="_blank" class="leetcode-link" 
+                                               onclick="event.stopPropagation()">LeetCode →</a>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Toggle week expansion
+        function toggleWeek(week) {
+            const card = document.getElementById(`week-${week}`);
+            card.classList.toggle('expanded');
+        }
+
+        // Create confetti
+        function createConfetti() {
+            const colors = ['#ff69b4', '#9b59b6', '#ffd93d', '#00d4aa', '#ff6b6b'];
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.cssText = `
+                    left: ${Math.random() * 100}vw;
+                    top: -10px;
+                    width: ${Math.random() * 10 + 5}px;
+                    height: ${Math.random() * 10 + 5}px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    border: 2px solid #1a1a1a;
+                    animation: fall ${Math.random() * 2 + 2}s linear forwards;
+                `;
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 4000);
+            }
+
+            // Add fall animation dynamically
+            if (!document.getElementById('confetti-style')) {
+                const style = document.createElement('style');
+                style.id = 'confetti-style';
+                style.textContent = `
+                    @keyframes fall {
+                        to {
+                            transform: translateY(100vh) rotate(720deg);
+                            opacity: 0;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+
+        // Toggle problem completion
+        function toggleProblem(id, element) {
+            completedProblems[id] = !completedProblems[id];
+            element.classList.toggle('completed');
+
+            if (completedProblems[id]) {
+                // Update today's count
+                const today = new Date().toDateString();
+                if (todayCompleted.date !== today) {
+                    todayCompleted = { date: today, count: 1 };
+                } else {
+                    todayCompleted.count++;
+                }
+
+                // Update streak
+                streakData.lastDate = today;
+                if (todayCompleted.count === 1) {
+                    streakData.count++;
+                }
+
+                // Celebrate milestones
+                const totalCompleted = Object.values(completedProblems).filter(v => v).length;
+                if (totalCompleted % 10 === 0) {
+                    createConfetti();
+                    showCelebration(`You've completed ${totalCompleted} problems! 🎊`);
+                }
+
+                // Update activity history
+                activityHistory[today] = (activityHistory[today] || 0) + 1;
+                localStorage.setItem('dsaActivity', JSON.stringify(activityHistory));
+                renderHeatmap();
+            } else {
+                // Decrease activity if unchecking
+                const today = new Date().toDateString();
+                if (activityHistory[today] && activityHistory[today] > 0) {
+                    activityHistory[today]--;
+                    localStorage.setItem('dsaActivity', JSON.stringify(activityHistory));
+                    renderHeatmap();
+                }
+            }
+
+            localStorage.setItem('dsaProgress', JSON.stringify(completedProblems));
+            localStorage.setItem('dsaStreak', JSON.stringify(streakData));
+            localStorage.setItem('dsaToday', JSON.stringify(todayCompleted));
+
+            updateStats();
+        }
+
+        // Update all stats
+        function updateStats() {
+            const completed = Object.values(completedProblems).filter(v => v).length;
+            const total = 250;
+            const percentage = (completed / total * 100).toFixed(1);
+
+            document.getElementById('completedCount').textContent = completed;
+            document.getElementById('remainingCount').textContent = total - completed;
+            document.getElementById('todayCount').textContent = todayCompleted.count;
+            document.getElementById('progressPercent').textContent = `${percentage}%`;
+            document.getElementById('progressBar').style.width = `${percentage}%`;
+            document.getElementById('streakDays').textContent = streakData.count;
+        }
+
+        // Show celebration modal
+        function showCelebration(text) {
+            document.getElementById('celebrationText').textContent = text;
+            document.getElementById('celebrationModal').classList.add('active');
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('celebrationModal').classList.remove('active');
+        }
+
+        // Reset progress
+        function resetProgress() {
+            if (confirm('Are you sure you want to reset all progress? This cannot be undone.')) {
+                completedProblems = {};
+                streakData = { count: 0, lastDate: null };
+                todayCompleted = { date: null, count: 0 };
+                activityHistory = {};
+                localStorage.removeItem('dsaProgress');
+                localStorage.removeItem('dsaStreak');
+                localStorage.removeItem('dsaToday');
+                localStorage.removeItem('dsaActivity');
+                renderHeatmap();
+                renderWeeks();
+                updateStats();
+            }
+        }
+
+        // Start
+        init();
+    </script>
+</body>
+
+</html>
