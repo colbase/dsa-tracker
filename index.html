@@ -1006,7 +1006,7 @@
                     <div class="logo-icon">�</div>
                     <div class="logo-text">
                         <h1>DSA Tracker <span class="version-badge">v3.0</span></h1>
-                        <p>Master 250 problems step by step</p>
+                        <p>Master 350 problems step by step</p>
                     </div>
                 </div>
                 <button class="reset-btn" onclick="resetProgress()">↻ Reset All</button>
@@ -1017,7 +1017,7 @@
                     <div class="stat-label">✓ Completed</div>
                 </div>
                 <div class="stat-box highlight">
-                    <div class="stat-value" id="remainingCount">250</div>
+                    <div class="stat-value" id="remainingCount">350</div>
                     <div class="stat-label">📋 Remaining</div>
                 </div>
                 <div class="stat-box today">
@@ -1096,181 +1096,526 @@
             "Sliding Window": "🪟",
             "Stack & Queue": "📚",
             "Binary Search": "🔍",
-            "Linked Lists": "🔗"
+            "Linked Lists": "🔗",
+            "Trees": "🌳",
+            "Graphs": "🕸️",
+            "Heap": "⛰️",
+            "Dynamic Programming": "📊",
+            "Backtracking": "🔄"
         };
 
-        // Problem Data
+        // Problem Data - 350 Problems
         const problemsData = [
-            // Week 1-2: Arrays & Hashing
+            // Week 1-3: Arrays & Hashing (44 problems)
             {
-                week: "1-2", topic: "Arrays & Hashing", day: "Day 1-2", problems: [
+                week: "1-3", topic: "Arrays & Hashing", day: "Day 1-3: Basic Array", problems: [
                     { id: 1, name: "Two Sum", leetcode: 1, difficulty: "Easy" },
                     { id: 2, name: "Contains Duplicate", leetcode: 217, difficulty: "Easy" },
                     { id: 3, name: "Valid Anagram", leetcode: 242, difficulty: "Easy" },
                     { id: 4, name: "Concatenation of Array", leetcode: 1929, difficulty: "Easy" },
-                    { id: 5, name: "Replace Elements with Greatest on Right", leetcode: 1299, difficulty: "Easy" },
+                    { id: 5, name: "Replace Elements Greatest Right", leetcode: 1299, difficulty: "Easy" },
+                    { id: 6, name: "Is Subsequence", leetcode: 392, difficulty: "Easy" },
+                    { id: 7, name: "Length of Last Word", leetcode: 58, difficulty: "Easy" },
+                    { id: 8, name: "Longest Common Prefix", leetcode: 14, difficulty: "Easy" },
                 ]
             },
             {
-                week: "1-2", topic: "Arrays & Hashing", day: "Day 3-4", problems: [
-                    { id: 6, name: "Group Anagrams", leetcode: 49, difficulty: "Medium" },
-                    { id: 7, name: "Top K Frequent Elements", leetcode: 347, difficulty: "Medium" },
-                    { id: 8, name: "Encode and Decode Strings", leetcode: 271, difficulty: "Medium" },
-                    { id: 9, name: "Product of Array Except Self", leetcode: 238, difficulty: "Medium" },
-                    { id: 10, name: "Longest Consecutive Sequence", leetcode: 128, difficulty: "Medium" },
+                week: "1-3", topic: "Arrays & Hashing", day: "Day 4-6: HashMap Patterns", problems: [
+                    { id: 9, name: "Group Anagrams", leetcode: 49, difficulty: "Medium" },
+                    { id: 10, name: "Top K Frequent Elements", leetcode: 347, difficulty: "Medium" },
+                    { id: 11, name: "Encode and Decode Strings", leetcode: 271, difficulty: "Medium" },
+                    { id: 12, name: "Product of Array Except Self", leetcode: 238, difficulty: "Medium" },
+                    { id: 13, name: "Longest Consecutive Sequence", leetcode: 128, difficulty: "Medium" },
+                    { id: 14, name: "Valid Sudoku", leetcode: 36, difficulty: "Medium" },
+                    { id: 15, name: "Brick Wall", leetcode: 554, difficulty: "Medium" },
+                    { id: 16, name: "Find All Duplicates in Array", leetcode: 442, difficulty: "Medium" },
                 ]
             },
             {
-                week: "1-2", topic: "Arrays & Hashing", day: "Day 5-7", problems: [
-                    { id: 11, name: "Running Sum of 1d Array", leetcode: 1480, difficulty: "Easy" },
-                    { id: 12, name: "Find Pivot Index", leetcode: 724, difficulty: "Easy" },
-                    { id: 13, name: "Subarray Sum Equals K", leetcode: 560, difficulty: "Medium" },
-                    { id: 14, name: "Maximum Subarray", leetcode: 53, difficulty: "Medium" },
-                    { id: 15, name: "Maximum Product Subarray", leetcode: 152, difficulty: "Medium" },
+                week: "1-3", topic: "Arrays & Hashing", day: "Day 7-9: Prefix Sum", problems: [
+                    { id: 17, name: "Running Sum of 1d Array", leetcode: 1480, difficulty: "Easy" },
+                    { id: 18, name: "Find Pivot Index", leetcode: 724, difficulty: "Easy" },
+                    { id: 19, name: "Range Sum Query - Immutable", leetcode: 303, difficulty: "Easy" },
+                    { id: 20, name: "Subarray Sum Equals K", leetcode: 560, difficulty: "Medium" },
+                    { id: 21, name: "Maximum Subarray", leetcode: 53, difficulty: "Medium" },
+                    { id: 22, name: "Maximum Product Subarray", leetcode: 152, difficulty: "Medium" },
+                    { id: 23, name: "Contiguous Array", leetcode: 525, difficulty: "Medium" },
+                    { id: 24, name: "Range Sum Query 2D", leetcode: 304, difficulty: "Medium" },
                 ]
             },
             {
-                week: "1-2", topic: "Arrays & Hashing", day: "Day 8-10", problems: [
-                    { id: 16, name: "Valid Palindrome", leetcode: 125, difficulty: "Easy" },
-                    { id: 17, name: "Two Sum II - Sorted", leetcode: 167, difficulty: "Medium" },
-                    { id: 18, name: "3Sum", leetcode: 15, difficulty: "Medium" },
-                    { id: 19, name: "Container With Most Water", leetcode: 11, difficulty: "Medium" },
-                    { id: 20, name: "Trapping Rain Water", leetcode: 42, difficulty: "Hard" },
+                week: "1-3", topic: "Arrays & Hashing", day: "Day 10-12: Two Pointers", problems: [
+                    { id: 25, name: "Valid Palindrome", leetcode: 125, difficulty: "Easy" },
+                    { id: 26, name: "Two Sum II - Sorted", leetcode: 167, difficulty: "Medium" },
+                    { id: 27, name: "3Sum", leetcode: 15, difficulty: "Medium" },
+                    { id: 28, name: "3Sum Closest", leetcode: 16, difficulty: "Medium" },
+                    { id: 29, name: "Container With Most Water", leetcode: 11, difficulty: "Medium" },
+                    { id: 30, name: "Trapping Rain Water", leetcode: 42, difficulty: "Hard" },
+                    { id: 31, name: "Valid Palindrome II", leetcode: 680, difficulty: "Easy" },
+                    { id: 32, name: "Reverse String", leetcode: 344, difficulty: "Easy" },
                 ]
             },
             {
-                week: "1-2", topic: "Arrays & Hashing", day: "Day 11-14", problems: [
-                    { id: 21, name: "Move Zeroes", leetcode: 283, difficulty: "Easy" },
-                    { id: 22, name: "Remove Duplicates", leetcode: 26, difficulty: "Easy" },
-                    { id: 23, name: "Remove Element", leetcode: 27, difficulty: "Easy" },
-                    { id: 24, name: "Sort Colors", leetcode: 75, difficulty: "Medium" },
-                    { id: 25, name: "Rotate Array", leetcode: 189, difficulty: "Medium" },
-                    { id: 26, name: "Merge Intervals", leetcode: 56, difficulty: "Medium" },
-                    { id: 27, name: "Insert Interval", leetcode: 57, difficulty: "Medium" },
-                    { id: 28, name: "Non-overlapping Intervals", leetcode: 435, difficulty: "Medium" },
-                    { id: 29, name: "First Missing Positive", leetcode: 41, difficulty: "Hard" },
-                    { id: 30, name: "4Sum", leetcode: 18, difficulty: "Medium" },
+                week: "1-3", topic: "Arrays & Hashing", day: "Day 13-17: Array Manipulation", problems: [
+                    { id: 33, name: "Move Zeroes", leetcode: 283, difficulty: "Easy" },
+                    { id: 34, name: "Remove Duplicates Sorted Array", leetcode: 26, difficulty: "Easy" },
+                    { id: 35, name: "Remove Element", leetcode: 27, difficulty: "Easy" },
+                    { id: 36, name: "Sort Colors", leetcode: 75, difficulty: "Medium" },
+                    { id: 37, name: "Rotate Array", leetcode: 189, difficulty: "Medium" },
+                    { id: 38, name: "Merge Intervals", leetcode: 56, difficulty: "Medium" },
+                    { id: 39, name: "Insert Interval", leetcode: 57, difficulty: "Medium" },
+                    { id: 40, name: "Non-overlapping Intervals", leetcode: 435, difficulty: "Medium" },
+                    { id: 41, name: "First Missing Positive", leetcode: 41, difficulty: "Hard" },
+                    { id: 42, name: "4Sum", leetcode: 18, difficulty: "Medium" },
+                    { id: 43, name: "Meeting Rooms", leetcode: 252, difficulty: "Easy" },
+                    { id: 44, name: "Meeting Rooms II", leetcode: 253, difficulty: "Medium" },
                 ]
             },
-            // Week 3-4: Sliding Window
+            // Week 4-5: Sliding Window (20 problems)
             {
-                week: "3-4", topic: "Sliding Window", day: "Day 15-17", problems: [
-                    { id: 31, name: "Maximum Average Subarray I", leetcode: 643, difficulty: "Easy" },
-                    { id: 32, name: "Find All Anagrams", leetcode: 438, difficulty: "Medium" },
-                    { id: 33, name: "Permutation in String", leetcode: 567, difficulty: "Medium" },
-                    { id: 34, name: "Max Sum Distinct Subarrays", leetcode: 2461, difficulty: "Medium" },
-                    { id: 35, name: "Repeated DNA Sequences", leetcode: 187, difficulty: "Medium" },
-                ]
-            },
-            {
-                week: "3-4", topic: "Sliding Window", day: "Day 18-21", problems: [
-                    { id: 36, name: "Best Time Buy/Sell Stock", leetcode: 121, difficulty: "Easy" },
-                    { id: 37, name: "Longest Substring No Repeat", leetcode: 3, difficulty: "Medium" },
-                    { id: 38, name: "Longest Repeating Char Replace", leetcode: 424, difficulty: "Medium" },
-                    { id: 39, name: "Max Consecutive Ones III", leetcode: 1004, difficulty: "Medium" },
-                    { id: 40, name: "Fruit Into Baskets", leetcode: 904, difficulty: "Medium" },
-                    { id: 41, name: "Minimum Window Substring", leetcode: 76, difficulty: "Hard" },
-                    { id: 42, name: "Sliding Window Maximum", leetcode: 239, difficulty: "Hard" },
-                    { id: 43, name: "Min Size Subarray Sum", leetcode: 209, difficulty: "Medium" },
-                    { id: 44, name: "Subarrays K Different", leetcode: 992, difficulty: "Hard" },
-                    { id: 45, name: "Longest Substr K Distinct", leetcode: 340, difficulty: "Medium" },
-                ]
-            },
-            // Week 5-6: Stack & Queue
-            {
-                week: "5-6", topic: "Stack & Queue", day: "Day 22-24", problems: [
-                    { id: 46, name: "Valid Parentheses", leetcode: 20, difficulty: "Easy" },
-                    { id: 47, name: "Min Stack", leetcode: 155, difficulty: "Medium" },
-                    { id: 48, name: "Queue using Stacks", leetcode: 232, difficulty: "Easy" },
-                    { id: 49, name: "Stack using Queues", leetcode: 225, difficulty: "Easy" },
-                    { id: 50, name: "Baseball Game", leetcode: 682, difficulty: "Easy" },
+                week: "4-5", topic: "Sliding Window", day: "Day 18-20: Fixed Window", problems: [
+                    { id: 45, name: "Maximum Average Subarray I", leetcode: 643, difficulty: "Easy" },
+                    { id: 46, name: "Find All Anagrams in String", leetcode: 438, difficulty: "Medium" },
+                    { id: 47, name: "Permutation in String", leetcode: 567, difficulty: "Medium" },
+                    { id: 48, name: "Max Sum Distinct Subarrays", leetcode: 2461, difficulty: "Medium" },
+                    { id: 49, name: "Repeated DNA Sequences", leetcode: 187, difficulty: "Medium" },
+                    { id: 50, name: "Contains Duplicate II", leetcode: 219, difficulty: "Easy" },
+                    { id: 51, name: "Grumpy Bookstore Owner", leetcode: 1052, difficulty: "Medium" },
                 ]
             },
             {
-                week: "5-6", topic: "Stack & Queue", day: "Day 25-28", problems: [
-                    { id: 51, name: "Next Greater Element I", leetcode: 496, difficulty: "Easy" },
-                    { id: 52, name: "Daily Temperatures", leetcode: 739, difficulty: "Medium" },
-                    { id: 53, name: "Next Greater Element II", leetcode: 503, difficulty: "Medium" },
-                    { id: 54, name: "Online Stock Span", leetcode: 901, difficulty: "Medium" },
-                    { id: 55, name: "Car Fleet", leetcode: 853, difficulty: "Medium" },
-                    { id: 56, name: "Remove K Digits", leetcode: 402, difficulty: "Medium" },
-                    { id: 57, name: "Largest Rectangle Histogram", leetcode: 84, difficulty: "Hard" },
-                    { id: 58, name: "Maximal Rectangle", leetcode: 85, difficulty: "Hard" },
+                week: "4-5", topic: "Sliding Window", day: "Day 21-25: Variable Window", problems: [
+                    { id: 52, name: "Best Time Buy Sell Stock", leetcode: 121, difficulty: "Easy" },
+                    { id: 53, name: "Longest Substring No Repeat", leetcode: 3, difficulty: "Medium" },
+                    { id: 54, name: "Longest Repeating Char Replace", leetcode: 424, difficulty: "Medium" },
+                    { id: 55, name: "Max Consecutive Ones III", leetcode: 1004, difficulty: "Medium" },
+                    { id: 56, name: "Fruit Into Baskets", leetcode: 904, difficulty: "Medium" },
+                    { id: 57, name: "Minimum Window Substring", leetcode: 76, difficulty: "Hard" },
+                    { id: 58, name: "Sliding Window Maximum", leetcode: 239, difficulty: "Hard" },
+                    { id: 59, name: "Minimum Size Subarray Sum", leetcode: 209, difficulty: "Medium" },
+                    { id: 60, name: "Subarrays K Different Integers", leetcode: 992, difficulty: "Hard" },
+                    { id: 61, name: "Longest Substr K Distinct", leetcode: 340, difficulty: "Medium" },
+                    { id: 62, name: "Count Nice Subarrays", leetcode: 1248, difficulty: "Medium" },
+                    { id: 63, name: "Binary Subarrays With Sum", leetcode: 930, difficulty: "Medium" },
+                    { id: 64, name: "Get Equal Substrings Budget", leetcode: 1208, difficulty: "Medium" },
+                ]
+            },
+            // Week 6-7: Stack & Queue (27 problems)
+            {
+                week: "6-7", topic: "Stack & Queue", day: "Day 26-28: Stack Basics", problems: [
+                    { id: 65, name: "Valid Parentheses", leetcode: 20, difficulty: "Easy" },
+                    { id: 66, name: "Min Stack", leetcode: 155, difficulty: "Medium" },
+                    { id: 67, name: "Queue using Stacks", leetcode: 232, difficulty: "Easy" },
+                    { id: 68, name: "Stack using Queues", leetcode: 225, difficulty: "Easy" },
+                    { id: 69, name: "Baseball Game", leetcode: 682, difficulty: "Easy" },
+                    { id: 70, name: "Backspace String Compare", leetcode: 844, difficulty: "Easy" },
+                    { id: 71, name: "Remove Adjacent Duplicates", leetcode: 1047, difficulty: "Easy" },
+                    { id: 72, name: "Make The String Great", leetcode: 1544, difficulty: "Easy" },
                 ]
             },
             {
-                week: "5-6", topic: "Stack & Queue", day: "Day 29-31", problems: [
-                    { id: 59, name: "Evaluate RPN", leetcode: 150, difficulty: "Medium" },
-                    { id: 60, name: "Basic Calculator II", leetcode: 227, difficulty: "Medium" },
-                    { id: 61, name: "Basic Calculator", leetcode: 224, difficulty: "Hard" },
-                    { id: 62, name: "Decode String", leetcode: 394, difficulty: "Medium" },
-                    { id: 63, name: "Asteroid Collision", leetcode: 735, difficulty: "Medium" },
-                    { id: 64, name: "Generate Parentheses", leetcode: 22, difficulty: "Medium" },
-                    { id: 65, name: "Simplify Path", leetcode: 71, difficulty: "Medium" },
-                ]
-            },
-            // Week 7-8: Binary Search
-            {
-                week: "7-8", topic: "Binary Search", day: "Day 32-34", problems: [
-                    { id: 66, name: "Binary Search", leetcode: 704, difficulty: "Easy" },
-                    { id: 67, name: "Search Insert Position", leetcode: 35, difficulty: "Easy" },
-                    { id: 68, name: "Guess Number", leetcode: 374, difficulty: "Easy" },
-                    { id: 69, name: "First Bad Version", leetcode: 278, difficulty: "Easy" },
-                    { id: 70, name: "Find Smallest Letter", leetcode: 744, difficulty: "Easy" },
+                week: "6-7", topic: "Stack & Queue", day: "Day 29-32: Monotonic Stack", problems: [
+                    { id: 73, name: "Next Greater Element I", leetcode: 496, difficulty: "Easy" },
+                    { id: 74, name: "Daily Temperatures", leetcode: 739, difficulty: "Medium" },
+                    { id: 75, name: "Next Greater Element II", leetcode: 503, difficulty: "Medium" },
+                    { id: 76, name: "Online Stock Span", leetcode: 901, difficulty: "Medium" },
+                    { id: 77, name: "Car Fleet", leetcode: 853, difficulty: "Medium" },
+                    { id: 78, name: "Remove K Digits", leetcode: 402, difficulty: "Medium" },
+                    { id: 79, name: "Largest Rectangle Histogram", leetcode: 84, difficulty: "Hard" },
+                    { id: 80, name: "Maximal Rectangle", leetcode: 85, difficulty: "Hard" },
+                    { id: 81, name: "Trapping Rain Water", leetcode: 42, difficulty: "Hard" },
+                    { id: 82, name: "Sum Subarray Minimums", leetcode: 907, difficulty: "Medium" },
                 ]
             },
             {
-                week: "7-8", topic: "Binary Search", day: "Day 35-38", problems: [
-                    { id: 71, name: "Search 2D Matrix", leetcode: 74, difficulty: "Medium" },
-                    { id: 72, name: "Search Rotated Sorted", leetcode: 33, difficulty: "Medium" },
-                    { id: 73, name: "Search Rotated II", leetcode: 81, difficulty: "Medium" },
-                    { id: 74, name: "Find Min Rotated", leetcode: 153, difficulty: "Medium" },
-                    { id: 75, name: "Find Peak Element", leetcode: 162, difficulty: "Medium" },
-                    { id: 76, name: "Find First Last Position", leetcode: 34, difficulty: "Medium" },
-                    { id: 77, name: "Single Sorted Element", leetcode: 540, difficulty: "Medium" },
-                    { id: 78, name: "Search 2D Matrix II", leetcode: 240, difficulty: "Medium" },
+                week: "6-7", topic: "Stack & Queue", day: "Day 33-35: Expression Eval", problems: [
+                    { id: 83, name: "Evaluate RPN", leetcode: 150, difficulty: "Medium" },
+                    { id: 84, name: "Basic Calculator II", leetcode: 227, difficulty: "Medium" },
+                    { id: 85, name: "Basic Calculator", leetcode: 224, difficulty: "Hard" },
+                    { id: 86, name: "Decode String", leetcode: 394, difficulty: "Medium" },
+                    { id: 87, name: "Asteroid Collision", leetcode: 735, difficulty: "Medium" },
+                    { id: 88, name: "Generate Parentheses", leetcode: 22, difficulty: "Medium" },
+                    { id: 89, name: "Simplify Path", leetcode: 71, difficulty: "Medium" },
+                    { id: 90, name: "Remove Outermost Parentheses", leetcode: 1021, difficulty: "Easy" },
+                    { id: 91, name: "Min Add Valid Parentheses", leetcode: 921, difficulty: "Medium" },
+                ]
+            },
+            // Week 8-9: Binary Search (28 problems)
+            {
+                week: "8-9", topic: "Binary Search", day: "Day 36-38: Standard Binary Search", problems: [
+                    { id: 92, name: "Binary Search", leetcode: 704, difficulty: "Easy" },
+                    { id: 93, name: "Search Insert Position", leetcode: 35, difficulty: "Easy" },
+                    { id: 94, name: "Guess Number Higher Lower", leetcode: 374, difficulty: "Easy" },
+                    { id: 95, name: "First Bad Version", leetcode: 278, difficulty: "Easy" },
+                    { id: 96, name: "Find Smallest Letter", leetcode: 744, difficulty: "Easy" },
+                    { id: 97, name: "Valid Perfect Square", leetcode: 367, difficulty: "Easy" },
+                    { id: 98, name: "Arranging Coins", leetcode: 441, difficulty: "Easy" },
+                    { id: 99, name: "Count Negative Numbers", leetcode: 1351, difficulty: "Easy" },
                 ]
             },
             {
-                week: "7-8", topic: "Binary Search", day: "Day 39-42", problems: [
-                    { id: 79, name: "Sqrt(x)", leetcode: 69, difficulty: "Easy" },
-                    { id: 80, name: "Koko Eating Bananas", leetcode: 875, difficulty: "Medium" },
-                    { id: 81, name: "Capacity Ship Packages", leetcode: 1011, difficulty: "Medium" },
-                    { id: 82, name: "Split Array Largest Sum", leetcode: 410, difficulty: "Hard" },
-                    { id: 83, name: "Min Distance Gas Station", leetcode: 774, difficulty: "Hard" },
-                    { id: 84, name: "K Closest Elements", leetcode: 658, difficulty: "Medium" },
-                    { id: 85, name: "Time Based Key-Value", leetcode: 981, difficulty: "Medium" },
-                    { id: 86, name: "Median Two Sorted", leetcode: 4, difficulty: "Hard" },
-                ]
-            },
-            // Week 9-10: Linked Lists
-            {
-                week: "9-10", topic: "Linked Lists", day: "Day 43-45", problems: [
-                    { id: 87, name: "Reverse Linked List", leetcode: 206, difficulty: "Easy" },
-                    { id: 88, name: "Merge Two Sorted Lists", leetcode: 21, difficulty: "Easy" },
-                    { id: 89, name: "Palindrome Linked List", leetcode: 234, difficulty: "Easy" },
-                    { id: 90, name: "Remove LL Elements", leetcode: 203, difficulty: "Easy" },
-                    { id: 91, name: "Remove Duplicates LL", leetcode: 83, difficulty: "Easy" },
-                    { id: 92, name: "Middle of LL", leetcode: 876, difficulty: "Easy" },
+                week: "8-9", topic: "Binary Search", day: "Day 39-42: Modified Binary Search", problems: [
+                    { id: 100, name: "Search a 2D Matrix", leetcode: 74, difficulty: "Medium" },
+                    { id: 101, name: "Search Rotated Sorted Array", leetcode: 33, difficulty: "Medium" },
+                    { id: 102, name: "Search Rotated Sorted II", leetcode: 81, difficulty: "Medium" },
+                    { id: 103, name: "Find Min Rotated Sorted", leetcode: 153, difficulty: "Medium" },
+                    { id: 104, name: "Find Min Rotated II", leetcode: 154, difficulty: "Hard" },
+                    { id: 105, name: "Find Peak Element", leetcode: 162, difficulty: "Medium" },
+                    { id: 106, name: "Find First Last Position", leetcode: 34, difficulty: "Medium" },
+                    { id: 107, name: "Single Element Sorted", leetcode: 540, difficulty: "Medium" },
+                    { id: 108, name: "Search 2D Matrix II", leetcode: 240, difficulty: "Medium" },
+                    { id: 109, name: "Successful Pairs Spells", leetcode: 2300, difficulty: "Medium" },
                 ]
             },
             {
-                week: "9-10", topic: "Linked Lists", day: "Day 46-52", problems: [
-                    { id: 93, name: "Linked List Cycle", leetcode: 141, difficulty: "Easy" },
-                    { id: 94, name: "Linked List Cycle II", leetcode: 142, difficulty: "Medium" },
-                    { id: 95, name: "Remove Nth From End", leetcode: 19, difficulty: "Medium" },
-                    { id: 96, name: "Intersection Two LL", leetcode: 160, difficulty: "Easy" },
-                    { id: 97, name: "Find Duplicate", leetcode: 287, difficulty: "Medium" },
-                    { id: 98, name: "Reorder List", leetcode: 143, difficulty: "Medium" },
-                    { id: 99, name: "Add Two Numbers", leetcode: 2, difficulty: "Medium" },
-                    { id: 100, name: "Copy Random Pointer", leetcode: 138, difficulty: "Medium" },
-                    { id: 101, name: "Swap Nodes Pairs", leetcode: 24, difficulty: "Medium" },
-                    { id: 102, name: "Rotate List", leetcode: 61, difficulty: "Medium" },
-                    { id: 103, name: "Sort List", leetcode: 148, difficulty: "Medium" },
-                    { id: 104, name: "LRU Cache", leetcode: 146, difficulty: "Medium" },
-                    { id: 105, name: "LFU Cache", leetcode: 460, difficulty: "Hard" },
-                    { id: 106, name: "Merge K Sorted Lists", leetcode: 23, difficulty: "Hard" },
-                    { id: 107, name: "Reverse K-Group", leetcode: 25, difficulty: "Hard" },
+                week: "8-9", topic: "Binary Search", day: "Day 43-46: Binary Search on Answer", problems: [
+                    { id: 110, name: "Sqrt(x)", leetcode: 69, difficulty: "Easy" },
+                    { id: 111, name: "Koko Eating Bananas", leetcode: 875, difficulty: "Medium" },
+                    { id: 112, name: "Capacity Ship Packages", leetcode: 1011, difficulty: "Medium" },
+                    { id: 113, name: "Split Array Largest Sum", leetcode: 410, difficulty: "Hard" },
+                    { id: 114, name: "Min Distance Gas Station", leetcode: 774, difficulty: "Hard" },
+                    { id: 115, name: "Find K Closest Elements", leetcode: 658, difficulty: "Medium" },
+                    { id: 116, name: "Time Based Key-Value", leetcode: 981, difficulty: "Medium" },
+                    { id: 117, name: "Median Two Sorted Arrays", leetcode: 4, difficulty: "Hard" },
+                    { id: 118, name: "Magnetic Force Two Balls", leetcode: 1552, difficulty: "Medium" },
+                    { id: 119, name: "Min Days Make Bouquets", leetcode: 1482, difficulty: "Medium" },
+                ]
+            },
+            // Week 10-11: Linked Lists (28 problems)
+            {
+                week: "10-11", topic: "Linked Lists", day: "Day 47-49: Basic Operations", problems: [
+                    { id: 120, name: "Reverse Linked List", leetcode: 206, difficulty: "Easy" },
+                    { id: 121, name: "Merge Two Sorted Lists", leetcode: 21, difficulty: "Easy" },
+                    { id: 122, name: "Palindrome Linked List", leetcode: 234, difficulty: "Easy" },
+                    { id: 123, name: "Remove LL Elements", leetcode: 203, difficulty: "Easy" },
+                    { id: 124, name: "Remove Duplicates Sorted LL", leetcode: 83, difficulty: "Easy" },
+                    { id: 125, name: "Middle of Linked List", leetcode: 876, difficulty: "Easy" },
+                    { id: 126, name: "Delete Node in LL", leetcode: 237, difficulty: "Medium" },
+                    { id: 127, name: "Convert Binary to Integer", leetcode: 1290, difficulty: "Easy" },
+                    { id: 128, name: "Remove Duplicates II", leetcode: 82, difficulty: "Medium" },
+                ]
+            },
+            {
+                week: "10-11", topic: "Linked Lists", day: "Day 50-52: Two Pointer", problems: [
+                    { id: 129, name: "Linked List Cycle", leetcode: 141, difficulty: "Easy" },
+                    { id: 130, name: "Linked List Cycle II", leetcode: 142, difficulty: "Medium" },
+                    { id: 131, name: "Remove Nth From End", leetcode: 19, difficulty: "Medium" },
+                    { id: 132, name: "Intersection Two LL", leetcode: 160, difficulty: "Easy" },
+                    { id: 133, name: "Find Duplicate Number", leetcode: 287, difficulty: "Medium" },
+                    { id: 134, name: "Reorder List", leetcode: 143, difficulty: "Medium" },
+                    { id: 135, name: "Partition List", leetcode: 86, difficulty: "Medium" },
+                    { id: 136, name: "Odd Even Linked List", leetcode: 328, difficulty: "Medium" },
+                ]
+            },
+            {
+                week: "10-11", topic: "Linked Lists", day: "Day 53-56: Advanced Operations", problems: [
+                    { id: 137, name: "Add Two Numbers", leetcode: 2, difficulty: "Medium" },
+                    { id: 138, name: "Add Two Numbers II", leetcode: 445, difficulty: "Medium" },
+                    { id: 139, name: "Copy Random Pointer", leetcode: 138, difficulty: "Medium" },
+                    { id: 140, name: "Swap Nodes Pairs", leetcode: 24, difficulty: "Medium" },
+                    { id: 141, name: "Rotate List", leetcode: 61, difficulty: "Medium" },
+                    { id: 142, name: "Sort List", leetcode: 148, difficulty: "Medium" },
+                    { id: 143, name: "Insertion Sort List", leetcode: 147, difficulty: "Medium" },
+                    { id: 144, name: "LRU Cache", leetcode: 146, difficulty: "Medium" },
+                    { id: 145, name: "LFU Cache", leetcode: 460, difficulty: "Hard" },
+                    { id: 146, name: "Merge K Sorted Lists", leetcode: 23, difficulty: "Hard" },
+                    { id: 147, name: "Reverse Nodes K-Group", leetcode: 25, difficulty: "Hard" },
+                ]
+            },
+            // Week 12-15: Trees (53 problems)
+            {
+                week: "12-15", topic: "Trees", day: "Day 57-60: Tree Traversals", problems: [
+                    { id: 148, name: "Binary Tree Inorder", leetcode: 94, difficulty: "Easy" },
+                    { id: 149, name: "Binary Tree Preorder", leetcode: 144, difficulty: "Easy" },
+                    { id: 150, name: "Binary Tree Postorder", leetcode: 145, difficulty: "Easy" },
+                    { id: 151, name: "Level Order Traversal", leetcode: 102, difficulty: "Medium" },
+                    { id: 152, name: "Level Order II", leetcode: 107, difficulty: "Medium" },
+                    { id: 153, name: "Zigzag Level Order", leetcode: 103, difficulty: "Medium" },
+                    { id: 154, name: "N-ary Level Order", leetcode: 429, difficulty: "Medium" },
+                    { id: 155, name: "N-ary Preorder", leetcode: 589, difficulty: "Easy" },
+                    { id: 156, name: "N-ary Postorder", leetcode: 590, difficulty: "Easy" },
+                    { id: 157, name: "Average of Levels", leetcode: 637, difficulty: "Easy" },
+                ]
+            },
+            {
+                week: "12-15", topic: "Trees", day: "Day 61-64: Basic Tree Problems", problems: [
+                    { id: 158, name: "Maximum Depth", leetcode: 104, difficulty: "Easy" },
+                    { id: 159, name: "Minimum Depth", leetcode: 111, difficulty: "Easy" },
+                    { id: 160, name: "Same Tree", leetcode: 100, difficulty: "Easy" },
+                    { id: 161, name: "Symmetric Tree", leetcode: 101, difficulty: "Easy" },
+                    { id: 162, name: "Invert Binary Tree", leetcode: 226, difficulty: "Easy" },
+                    { id: 163, name: "Diameter of Binary Tree", leetcode: 543, difficulty: "Easy" },
+                    { id: 164, name: "Balanced Binary Tree", leetcode: 110, difficulty: "Easy" },
+                    { id: 165, name: "Subtree of Another Tree", leetcode: 572, difficulty: "Easy" },
+                    { id: 166, name: "Merge Two Binary Trees", leetcode: 617, difficulty: "Easy" },
+                    { id: 167, name: "Univalued Binary Tree", leetcode: 965, difficulty: "Easy" },
+                    { id: 168, name: "Leaf-Similar Trees", leetcode: 872, difficulty: "Easy" },
+                ]
+            },
+            {
+                week: "12-15", topic: "Trees", day: "Day 65-69: Tree DFS", problems: [
+                    { id: 169, name: "Path Sum", leetcode: 112, difficulty: "Easy" },
+                    { id: 170, name: "Path Sum II", leetcode: 113, difficulty: "Medium" },
+                    { id: 171, name: "Path Sum III", leetcode: 437, difficulty: "Medium" },
+                    { id: 172, name: "Sum Root to Leaf", leetcode: 129, difficulty: "Medium" },
+                    { id: 173, name: "Right Side View", leetcode: 199, difficulty: "Medium" },
+                    { id: 174, name: "Count Good Nodes", leetcode: 1448, difficulty: "Medium" },
+                    { id: 175, name: "Lowest Common Ancestor", leetcode: 236, difficulty: "Medium" },
+                    { id: 176, name: "Max Path Sum", leetcode: 124, difficulty: "Hard" },
+                    { id: 177, name: "House Robber III", leetcode: 337, difficulty: "Medium" },
+                    { id: 178, name: "Sum of Left Leaves", leetcode: 404, difficulty: "Easy" },
+                    { id: 179, name: "Find Bottom Left", leetcode: 513, difficulty: "Medium" },
+                    { id: 180, name: "Distribute Coins", leetcode: 979, difficulty: "Medium" },
+                ]
+            },
+            {
+                week: "12-15", topic: "Trees", day: "Day 70-74: BST Problems", problems: [
+                    { id: 181, name: "Search in BST", leetcode: 700, difficulty: "Easy" },
+                    { id: 182, name: "Insert into BST", leetcode: 701, difficulty: "Medium" },
+                    { id: 183, name: "Delete Node BST", leetcode: 450, difficulty: "Medium" },
+                    { id: 184, name: "Validate BST", leetcode: 98, difficulty: "Medium" },
+                    { id: 185, name: "Kth Smallest BST", leetcode: 230, difficulty: "Medium" },
+                    { id: 186, name: "LCA of BST", leetcode: 235, difficulty: "Medium" },
+                    { id: 187, name: "Sorted Array to BST", leetcode: 108, difficulty: "Easy" },
+                    { id: 188, name: "Sorted List to BST", leetcode: 109, difficulty: "Medium" },
+                    { id: 189, name: "BST Iterator", leetcode: 173, difficulty: "Medium" },
+                    { id: 190, name: "Two Sum IV BST", leetcode: 653, difficulty: "Easy" },
+                    { id: 191, name: "Min Difference BST", leetcode: 530, difficulty: "Easy" },
+                    { id: 192, name: "Range Sum BST", leetcode: 938, difficulty: "Easy" },
+                ]
+            },
+            {
+                week: "12-15", topic: "Trees", day: "Day 75-77: Tree Construction", problems: [
+                    { id: 193, name: "Preorder Inorder Build", leetcode: 105, difficulty: "Medium" },
+                    { id: 194, name: "Inorder Postorder Build", leetcode: 106, difficulty: "Medium" },
+                    { id: 195, name: "Preorder Postorder Build", leetcode: 889, difficulty: "Medium" },
+                    { id: 196, name: "Flatten to Linked List", leetcode: 114, difficulty: "Medium" },
+                    { id: 197, name: "Serialize Deserialize", leetcode: 297, difficulty: "Hard" },
+                    { id: 198, name: "Populate Next Pointers", leetcode: 116, difficulty: "Medium" },
+                    { id: 199, name: "Populate Next II", leetcode: 117, difficulty: "Medium" },
+                    { id: 200, name: "Max Width Binary Tree", leetcode: 662, difficulty: "Medium" },
+                ]
+            },
+            // Week 16-19: Graphs (46 problems)
+            {
+                week: "16-19", topic: "Graphs", day: "Day 78-81: Graph Traversals", problems: [
+                    { id: 201, name: "Number of Islands", leetcode: 200, difficulty: "Medium" },
+                    { id: 202, name: "Max Area of Island", leetcode: 695, difficulty: "Medium" },
+                    { id: 203, name: "Clone Graph", leetcode: 133, difficulty: "Medium" },
+                    { id: 204, name: "Pacific Atlantic Water", leetcode: 417, difficulty: "Medium" },
+                    { id: 205, name: "Surrounded Regions", leetcode: 130, difficulty: "Medium" },
+                    { id: 206, name: "Flood Fill", leetcode: 733, difficulty: "Easy" },
+                    { id: 207, name: "Island Perimeter", leetcode: 463, difficulty: "Easy" },
+                    { id: 208, name: "Number Closed Islands", leetcode: 1254, difficulty: "Medium" },
+                    { id: 209, name: "Count Sub Islands", leetcode: 1905, difficulty: "Medium" },
+                    { id: 210, name: "Making Large Island", leetcode: 827, difficulty: "Hard" },
+                ]
+            },
+            {
+                week: "16-19", topic: "Graphs", day: "Day 82-86: BFS Applications", problems: [
+                    { id: 211, name: "Rotting Oranges", leetcode: 994, difficulty: "Medium" },
+                    { id: 212, name: "Walls and Gates", leetcode: 286, difficulty: "Medium" },
+                    { id: 213, name: "Shortest Path Binary Matrix", leetcode: 1091, difficulty: "Medium" },
+                    { id: 214, name: "Word Ladder", leetcode: 127, difficulty: "Hard" },
+                    { id: 215, name: "Word Ladder II", leetcode: 126, difficulty: "Hard" },
+                    { id: 216, name: "Open the Lock", leetcode: 752, difficulty: "Medium" },
+                    { id: 217, name: "Minimum Knight Moves", leetcode: 1197, difficulty: "Medium" },
+                    { id: 218, name: "01 Matrix", leetcode: 542, difficulty: "Medium" },
+                    { id: 219, name: "Shortest Bridge", leetcode: 934, difficulty: "Medium" },
+                    { id: 220, name: "As Far from Land", leetcode: 1162, difficulty: "Medium" },
+                ]
+            },
+            {
+                week: "16-19", topic: "Graphs", day: "Day 87-90: Topological Sort", problems: [
+                    { id: 221, name: "Course Schedule", leetcode: 207, difficulty: "Medium" },
+                    { id: 222, name: "Course Schedule II", leetcode: 210, difficulty: "Medium" },
+                    { id: 223, name: "Course Schedule IV", leetcode: 1462, difficulty: "Medium" },
+                    { id: 224, name: "Alien Dictionary", leetcode: 269, difficulty: "Hard" },
+                    { id: 225, name: "Minimum Height Trees", leetcode: 310, difficulty: "Medium" },
+                    { id: 226, name: "Sequence Reconstruction", leetcode: 444, difficulty: "Medium" },
+                    { id: 227, name: "Parallel Courses", leetcode: 1136, difficulty: "Medium" },
+                    { id: 228, name: "Find All Recipes", leetcode: 2115, difficulty: "Medium" },
+                    { id: 229, name: "Loud and Rich", leetcode: 851, difficulty: "Medium" },
+                ]
+            },
+            {
+                week: "16-19", topic: "Graphs", day: "Day 91-95: Union Find", problems: [
+                    { id: 230, name: "Connected Components", leetcode: 323, difficulty: "Medium" },
+                    { id: 231, name: "Graph Valid Tree", leetcode: 261, difficulty: "Medium" },
+                    { id: 232, name: "Redundant Connection", leetcode: 684, difficulty: "Medium" },
+                    { id: 233, name: "Redundant Connection II", leetcode: 685, difficulty: "Hard" },
+                    { id: 234, name: "Accounts Merge", leetcode: 721, difficulty: "Medium" },
+                    { id: 235, name: "Longest Consecutive", leetcode: 128, difficulty: "Medium" },
+                    { id: 236, name: "Number of Provinces", leetcode: 547, difficulty: "Medium" },
+                    { id: 237, name: "Smallest String Swaps", leetcode: 1202, difficulty: "Medium" },
+                    { id: 238, name: "Most Stones Removed", leetcode: 947, difficulty: "Medium" },
+                    { id: 239, name: "Equality Equations", leetcode: 990, difficulty: "Medium" },
+                ]
+            },
+            {
+                week: "16-19", topic: "Graphs", day: "Day 96-98: Shortest Path", problems: [
+                    { id: 240, name: "Network Delay Time", leetcode: 743, difficulty: "Medium" },
+                    { id: 241, name: "Cheapest Flights K Stops", leetcode: 787, difficulty: "Medium" },
+                    { id: 242, name: "Path Minimum Effort", leetcode: 1631, difficulty: "Medium" },
+                    { id: 243, name: "Swim Rising Water", leetcode: 778, difficulty: "Hard" },
+                    { id: 244, name: "Min Cost Connect Points", leetcode: 1584, difficulty: "Medium" },
+                    { id: 245, name: "City Smallest Neighbors", leetcode: 1334, difficulty: "Medium" },
+                    { id: 246, name: "Max Probability Path", leetcode: 1514, difficulty: "Medium" },
+                ]
+            },
+            // Week 20-21: Heap (20 problems)
+            {
+                week: "20-21", topic: "Heap", day: "Day 99-101: Basic Heap", problems: [
+                    { id: 247, name: "Kth Largest in Array", leetcode: 215, difficulty: "Medium" },
+                    { id: 248, name: "Kth Largest in Stream", leetcode: 703, difficulty: "Easy" },
+                    { id: 249, name: "Last Stone Weight", leetcode: 1046, difficulty: "Easy" },
+                    { id: 250, name: "K Closest Points", leetcode: 973, difficulty: "Medium" },
+                    { id: 251, name: "Sort By Frequency", leetcode: 451, difficulty: "Medium" },
+                    { id: 252, name: "Kth Smallest Matrix", leetcode: 378, difficulty: "Medium" },
+                    { id: 253, name: "Relative Ranks", leetcode: 506, difficulty: "Easy" },
+                    { id: 254, name: "Take Gifts Richest", leetcode: 2558, difficulty: "Easy" },
+                ]
+            },
+            {
+                week: "20-21", topic: "Heap", day: "Day 102-106: Advanced Heap", problems: [
+                    { id: 255, name: "Top K Frequent", leetcode: 347, difficulty: "Medium" },
+                    { id: 256, name: "Top K Frequent Words", leetcode: 692, difficulty: "Medium" },
+                    { id: 257, name: "Find Median Stream", leetcode: 295, difficulty: "Hard" },
+                    { id: 258, name: "Sliding Window Median", leetcode: 480, difficulty: "Hard" },
+                    { id: 259, name: "Task Scheduler", leetcode: 621, difficulty: "Medium" },
+                    { id: 260, name: "Reorganize String", leetcode: 767, difficulty: "Medium" },
+                    { id: 261, name: "Merge K Sorted", leetcode: 23, difficulty: "Hard" },
+                    { id: 262, name: "Ugly Number II", leetcode: 264, difficulty: "Medium" },
+                    { id: 263, name: "Super Ugly Number", leetcode: 313, difficulty: "Medium" },
+                    { id: 264, name: "Smallest Range K Lists", leetcode: 632, difficulty: "Hard" },
+                    { id: 265, name: "IPO", leetcode: 502, difficulty: "Hard" },
+                    { id: 266, name: "Max Subsequence Score", leetcode: 2542, difficulty: "Medium" },
+                ]
+            },
+            // Week 22-26: Dynamic Programming (60 problems)
+            {
+                week: "22-26", topic: "Dynamic Programming", day: "Day 107-110: 1D DP Basics", problems: [
+                    { id: 267, name: "Climbing Stairs", leetcode: 70, difficulty: "Easy" },
+                    { id: 268, name: "Min Cost Stairs", leetcode: 746, difficulty: "Easy" },
+                    { id: 269, name: "N-th Tribonacci", leetcode: 1137, difficulty: "Easy" },
+                    { id: 270, name: "Fibonacci Number", leetcode: 509, difficulty: "Easy" },
+                    { id: 271, name: "House Robber", leetcode: 198, difficulty: "Medium" },
+                    { id: 272, name: "House Robber II", leetcode: 213, difficulty: "Medium" },
+                    { id: 273, name: "Delete and Earn", leetcode: 740, difficulty: "Medium" },
+                    { id: 274, name: "Decode Ways", leetcode: 91, difficulty: "Medium" },
+                    { id: 275, name: "Counting Bits", leetcode: 338, difficulty: "Easy" },
+                ]
+            },
+            {
+                week: "22-26", topic: "Dynamic Programming", day: "Day 111-115: 1D DP Advanced", problems: [
+                    { id: 276, name: "Maximum Subarray", leetcode: 53, difficulty: "Medium" },
+                    { id: 277, name: "Max Product Subarray", leetcode: 152, difficulty: "Medium" },
+                    { id: 278, name: "Longest Increasing Sub", leetcode: 300, difficulty: "Medium" },
+                    { id: 279, name: "Number of LIS", leetcode: 673, difficulty: "Medium" },
+                    { id: 280, name: "Longest Turbulent", leetcode: 978, difficulty: "Medium" },
+                    { id: 281, name: "Word Break", leetcode: 139, difficulty: "Medium" },
+                    { id: 282, name: "Word Break II", leetcode: 140, difficulty: "Hard" },
+                    { id: 283, name: "Jump Game", leetcode: 55, difficulty: "Medium" },
+                    { id: 284, name: "Jump Game II", leetcode: 45, difficulty: "Medium" },
+                    { id: 285, name: "Longest Valid Parens", leetcode: 32, difficulty: "Hard" },
+                    { id: 286, name: "Perfect Squares", leetcode: 279, difficulty: "Medium" },
+                    { id: 287, name: "Partition Subset Sum", leetcode: 416, difficulty: "Medium" },
+                ]
+            },
+            {
+                week: "22-26", topic: "Dynamic Programming", day: "Day 116-119: 2D DP Grid", problems: [
+                    { id: 288, name: "Unique Paths", leetcode: 62, difficulty: "Medium" },
+                    { id: 289, name: "Unique Paths II", leetcode: 63, difficulty: "Medium" },
+                    { id: 290, name: "Minimum Path Sum", leetcode: 64, difficulty: "Medium" },
+                    { id: 291, name: "Triangle", leetcode: 120, difficulty: "Medium" },
+                    { id: 292, name: "Maximal Square", leetcode: 221, difficulty: "Medium" },
+                    { id: 293, name: "Dungeon Game", leetcode: 174, difficulty: "Hard" },
+                    { id: 294, name: "Cherry Pickup", leetcode: 741, difficulty: "Hard" },
+                    { id: 295, name: "Cherry Pickup II", leetcode: 1463, difficulty: "Hard" },
+                    { id: 296, name: "Out of Boundary", leetcode: 576, difficulty: "Medium" },
+                ]
+            },
+            {
+                week: "22-26", topic: "Dynamic Programming", day: "Day 120-124: String DP", problems: [
+                    { id: 297, name: "Longest Common Subseq", leetcode: 1143, difficulty: "Medium" },
+                    { id: 298, name: "Longest Palindrome Sub", leetcode: 5, difficulty: "Medium" },
+                    { id: 299, name: "Palindromic Substrings", leetcode: 647, difficulty: "Medium" },
+                    { id: 300, name: "Longest Palindrome Seq", leetcode: 516, difficulty: "Medium" },
+                    { id: 301, name: "Edit Distance", leetcode: 72, difficulty: "Medium" },
+                    { id: 302, name: "Distinct Subsequences", leetcode: 115, difficulty: "Hard" },
+                    { id: 303, name: "Interleaving String", leetcode: 97, difficulty: "Medium" },
+                    { id: 304, name: "Shortest Supersequence", leetcode: 1092, difficulty: "Hard" },
+                    { id: 305, name: "Min ASCII Delete", leetcode: 712, difficulty: "Medium" },
+                    { id: 306, name: "Delete Op Two Strings", leetcode: 583, difficulty: "Medium" },
+                ]
+            },
+            {
+                week: "22-26", topic: "Dynamic Programming", day: "Day 125-128: Knapsack DP", problems: [
+                    { id: 307, name: "Coin Change", leetcode: 322, difficulty: "Medium" },
+                    { id: 308, name: "Coin Change 2", leetcode: 518, difficulty: "Medium" },
+                    { id: 309, name: "Target Sum", leetcode: 494, difficulty: "Medium" },
+                    { id: 310, name: "Last Stone Weight II", leetcode: 1049, difficulty: "Medium" },
+                    { id: 311, name: "Ones and Zeroes", leetcode: 474, difficulty: "Medium" },
+                    { id: 312, name: "Profitable Schemes", leetcode: 879, difficulty: "Hard" },
+                    { id: 313, name: "Combination Sum IV", leetcode: 377, difficulty: "Medium" },
+                ]
+            },
+            {
+                week: "22-26", topic: "Dynamic Programming", day: "Day 129-131: Stock DP", problems: [
+                    { id: 314, name: "Buy Sell Stock", leetcode: 121, difficulty: "Easy" },
+                    { id: 315, name: "Buy Sell Stock II", leetcode: 122, difficulty: "Medium" },
+                    { id: 316, name: "Buy Sell Stock III", leetcode: 123, difficulty: "Hard" },
+                    { id: 317, name: "Buy Sell Stock IV", leetcode: 188, difficulty: "Hard" },
+                    { id: 318, name: "With Cooldown", leetcode: 309, difficulty: "Medium" },
+                    { id: 319, name: "With Transaction Fee", leetcode: 714, difficulty: "Medium" },
+                ]
+            },
+            {
+                week: "22-26", topic: "Dynamic Programming", day: "Day 132-135: Advanced DP", problems: [
+                    { id: 320, name: "Regex Matching", leetcode: 10, difficulty: "Hard" },
+                    { id: 321, name: "Wildcard Matching", leetcode: 44, difficulty: "Hard" },
+                    { id: 322, name: "Burst Balloons", leetcode: 312, difficulty: "Hard" },
+                    { id: 323, name: "Min Cost Cut Stick", leetcode: 1547, difficulty: "Hard" },
+                    { id: 324, name: "Stone Game", leetcode: 877, difficulty: "Medium" },
+                    { id: 325, name: "Stone Game II", leetcode: 1140, difficulty: "Medium" },
+                    { id: 326, name: "Predict Winner", leetcode: 486, difficulty: "Medium" },
+                ]
+            },
+            // Week 27-28: Backtracking (24 problems)
+            {
+                week: "27-28", topic: "Backtracking", day: "Day 136-139: Subsets & Combinations", problems: [
+                    { id: 327, name: "Subsets", leetcode: 78, difficulty: "Medium" },
+                    { id: 328, name: "Subsets II", leetcode: 90, difficulty: "Medium" },
+                    { id: 329, name: "Combinations", leetcode: 77, difficulty: "Medium" },
+                    { id: 330, name: "Combination Sum", leetcode: 39, difficulty: "Medium" },
+                    { id: 331, name: "Combination Sum II", leetcode: 40, difficulty: "Medium" },
+                    { id: 332, name: "Combination Sum III", leetcode: 216, difficulty: "Medium" },
+                    { id: 333, name: "Factor Combinations", leetcode: 254, difficulty: "Medium" },
+                ]
+            },
+            {
+                week: "27-28", topic: "Backtracking", day: "Day 140-144: Permutations & More", problems: [
+                    { id: 334, name: "Permutations", leetcode: 46, difficulty: "Medium" },
+                    { id: 335, name: "Permutations II", leetcode: 47, difficulty: "Medium" },
+                    { id: 336, name: "Next Permutation", leetcode: 31, difficulty: "Medium" },
+                    { id: 337, name: "Letter Combinations", leetcode: 17, difficulty: "Medium" },
+                    { id: 338, name: "Palindrome Partition", leetcode: 131, difficulty: "Medium" },
+                    { id: 339, name: "Restore IP Addresses", leetcode: 93, difficulty: "Medium" },
+                    { id: 340, name: "Generate Parentheses", leetcode: 22, difficulty: "Medium" },
+                    { id: 341, name: "Letter Case Permutation", leetcode: 784, difficulty: "Medium" },
+                    { id: 342, name: "Split Descending", leetcode: 1849, difficulty: "Medium" },
+                ]
+            },
+            {
+                week: "27-28", topic: "Backtracking", day: "Day 145-148: Grid Backtracking", problems: [
+                    { id: 343, name: "Word Search", leetcode: 79, difficulty: "Medium" },
+                    { id: 344, name: "Word Search II", leetcode: 212, difficulty: "Hard" },
+                    { id: 345, name: "N-Queens", leetcode: 51, difficulty: "Hard" },
+                    { id: 346, name: "N-Queens II", leetcode: 52, difficulty: "Hard" },
+                    { id: 347, name: "Sudoku Solver", leetcode: 37, difficulty: "Hard" },
+                    { id: 348, name: "Unique Paths III", leetcode: 980, difficulty: "Hard" },
+                    { id: 349, name: "Robot Room Cleaner", leetcode: 489, difficulty: "Hard" },
+                    { id: 350, name: "Path Maximum Gold", leetcode: 1219, difficulty: "Medium" },
                 ]
             },
         ];
@@ -1546,7 +1891,7 @@
         // Update all stats
         function updateStats() {
             const completed = Object.values(completedProblems).filter(v => v).length;
-            const total = 250;
+            const total = 350;
             const percentage = (completed / total * 100).toFixed(1);
 
             document.getElementById('completedCount').textContent = completed;
