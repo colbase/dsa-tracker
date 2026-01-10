@@ -133,6 +133,11 @@
             color: var(--border-black);
         }
 
+        .header-buttons {
+            display: flex;
+            gap: 0.75rem;
+        }
+
         .reset-btn {
             background: var(--bg-white);
             border: 3px solid var(--border-black);
@@ -995,6 +1000,146 @@
             height: 12px;
             border: 1px solid var(--border-black);
         }
+
+        /* History Modal */
+        .history-btn {
+            background: var(--accent-violet);
+            color: white;
+            border: 3px solid var(--border-black);
+            padding: 0.5rem 1rem;
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+            box-shadow: 3px 3px 0 var(--border-black);
+            transition: all 0.2s ease;
+        }
+
+        .history-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0 var(--border-black);
+        }
+
+        .history-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .history-modal-overlay.active {
+            display: flex;
+        }
+
+        .history-modal {
+            background: var(--bg-cream);
+            border: 4px solid var(--border-black);
+            box-shadow: 8px 8px 0 var(--border-black);
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .history-modal-header {
+            background: var(--accent-lavender);
+            padding: 1rem 1.5rem;
+            border-bottom: 3px solid var(--border-black);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .history-modal-header h2 {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        .history-close-btn {
+            background: var(--accent-pink);
+            border: 2px solid var(--border-black);
+            width: 32px;
+            height: 32px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .history-modal-content {
+            padding: 1.5rem;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .history-empty {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+            font-family: 'Space Mono', monospace;
+        }
+
+        .history-day {
+            margin-bottom: 1.5rem;
+        }
+
+        .history-date {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 0.9rem;
+            background: var(--accent-yellow);
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border: 2px solid var(--border-black);
+            margin-bottom: 0.75rem;
+        }
+
+        .history-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .history-item {
+            background: var(--bg-white);
+            border: 2px solid var(--border-black);
+            padding: 0.5rem 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+        }
+
+        .history-item-name {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .history-item-time {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .history-item-id {
+            background: var(--accent-cyan);
+            padding: 0.1rem 0.4rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            border: 1px solid var(--border-black);
+        }
     </style>
 </head>
 
@@ -1009,7 +1154,10 @@
                         <p>Master 350 problems step by step</p>
                     </div>
                 </div>
-                <button class="reset-btn" onclick="resetProgress()">↻ Reset All</button>
+                <div class="header-buttons">
+                    <button class="history-btn" onclick="showHistory()">📜 History</button>
+                    <button class="reset-btn" onclick="resetProgress()">↻ Reset All</button>
+                </div>
             </div>
             <div class="stats-bar">
                 <div class="stat-box">
@@ -1086,6 +1234,19 @@
             <h2>Amazing Progress!</h2>
             <p id="celebrationText">You've completed another problem! Keep up the great work!</p>
             <button class="modal-btn" onclick="closeModal()">Continue →</button>
+        </div>
+    </div>
+
+    <!-- History Modal -->
+    <div class="history-modal-overlay" id="historyModal">
+        <div class="history-modal">
+            <div class="history-modal-header">
+                <h2>📜 Completion History</h2>
+                <button class="history-close-btn" onclick="closeHistory()">×</button>
+            </div>
+            <div class="history-modal-content" id="historyContent">
+                <!-- Generated by JavaScript -->
+            </div>
         </div>
     </div>
 
@@ -1625,6 +1786,8 @@
         let streakData = JSON.parse(localStorage.getItem('dsaStreak')) || { count: 0, lastDate: null };
         let todayCompleted = JSON.parse(localStorage.getItem('dsaToday')) || { date: null, count: 0 };
         let activityHistory = JSON.parse(localStorage.getItem('dsaActivity')) || {};
+        let completionHistory = JSON.parse(localStorage.getItem('dsaCompletionHistory')) || [];
+
 
         // Initialize
         function init() {
@@ -1871,6 +2034,15 @@
                 activityHistory[today] = (activityHistory[today] || 0) + 1;
                 localStorage.setItem('dsaActivity', JSON.stringify(activityHistory));
                 renderHeatmap();
+
+                // Add to completion history
+                const problemName = getProblemNameById(id);
+                completionHistory.unshift({
+                    id: id,
+                    name: problemName,
+                    timestamp: new Date().toISOString()
+                });
+                localStorage.setItem('dsaCompletionHistory', JSON.stringify(completionHistory));
             } else {
                 // Decrease activity if unchecking
                 const today = new Date().toDateString();
@@ -1913,6 +2085,68 @@
             document.getElementById('celebrationModal').classList.remove('active');
         }
 
+        // Get problem name by ID
+        function getProblemNameById(id) {
+            for (const group of problemsData) {
+                for (const problem of group.problems) {
+                    if (problem.id === id) {
+                        return problem.name;
+                    }
+                }
+            }
+            return `Problem #${id}`;
+        }
+
+        // Show history modal
+        function showHistory() {
+            const container = document.getElementById('historyContent');
+
+            if (completionHistory.length === 0) {
+                container.innerHTML = '<div class="history-empty">📭 No problems completed yet.<br>Start solving to see your history!</div>';
+            } else {
+                // Group by date
+                const grouped = {};
+                completionHistory.forEach(item => {
+                    const date = new Date(item.timestamp).toDateString();
+                    if (!grouped[date]) grouped[date] = [];
+                    grouped[date].push(item);
+                });
+
+                let html = '';
+                for (const date in grouped) {
+                    const isToday = date === new Date().toDateString();
+                    const displayDate = isToday ? '📅 Today' : date;
+                    html += `<div class="history-day">
+                        <div class="history-date">${displayDate}</div>
+                        <div class="history-items">`;
+
+                    grouped[date].forEach(item => {
+                        const time = new Date(item.timestamp).toLocaleTimeString('en-US', {
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        });
+                        html += `<div class="history-item">
+                            <div class="history-item-name">
+                                <span class="history-item-id">#${item.id}</span>
+                                ${item.name}
+                            </div>
+                            <span class="history-item-time">${time}</span>
+                        </div>`;
+                    });
+
+                    html += '</div></div>';
+                }
+                container.innerHTML = html;
+            }
+
+            document.getElementById('historyModal').classList.add('active');
+        }
+
+        // Close history modal
+        function closeHistory() {
+            document.getElementById('historyModal').classList.remove('active');
+        }
+
         // Reset progress
         function resetProgress() {
             if (confirm('Are you sure you want to reset all progress? This cannot be undone.')) {
@@ -1920,10 +2154,12 @@
                 streakData = { count: 0, lastDate: null };
                 todayCompleted = { date: null, count: 0 };
                 activityHistory = {};
+                completionHistory = [];
                 localStorage.removeItem('dsaProgress');
                 localStorage.removeItem('dsaStreak');
                 localStorage.removeItem('dsaToday');
                 localStorage.removeItem('dsaActivity');
+                localStorage.removeItem('dsaCompletionHistory');
                 renderHeatmap();
                 renderWeeks();
                 updateStats();
